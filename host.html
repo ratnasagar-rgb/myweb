@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        #passwordPrompt {
+            text-align: center;
+            margin-top: 50px;
+        }
+        #passwordInput {
+            padding: 10px;
+            font-size: 1em;
+        }
+        #submitPassword {
+            padding: 10px 15px;
+            font-size: 1em;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="passwordPrompt">
+        <h1>Host Access Only</h1>
+        <p>Please enter the password to view the data:</p>
+        <input type="password" id="passwordInput" placeholder="Enter password">
+        <button id="submitPassword">Submit</button>
+    </div>
+
+    <div id="dataContainer" style="display: none;">
+        <h1>Host Page</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Crush Name</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody id="dataTable">
+                <!-- Data will be populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const PASSWORD = "host123"; // Set your password here
+
+        document.getElementById('submitPassword').addEventListener('click', () => {
+            const enteredPassword = document.getElementById('passwordInput').value;
+            if (enteredPassword === PASSWORD) {
+                document.getElementById('passwordPrompt').style.display = 'none';
+                document.getElementById('dataContainer').style.display = 'block';
+
+                // Fetch data from localStorage and populate the table
+                const searches = JSON.parse(localStorage.getItem('searches')) || [];
+                const tableBody = document.getElementById('dataTable');
+
+                searches.forEach((entry) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${entry.name}</td>
+                        <td>${entry.crushName}</td>
+                        <td>${new Date(entry.timestamp).toLocaleString()}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } else {
+                alert('Incorrect password. Access denied.');
+            }
+        });
+    </script>
+</body>
+</html>

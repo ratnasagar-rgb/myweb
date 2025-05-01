@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Interactive Form</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to this Website</h1>
+        <p> This website mabe for some who are not able to show their felling to their crush or love</p>
+    </header>
+    <main>
+        <form id="step1Form" class="form-container">
+            <label for="nameInput">Enter your name:</label>
+            <input type="text" id="nameInput" required>
+            <label for="ageInput">Enter your age:</label>
+            <input type="number" id="ageInput" required>
+            <button type="submit">Next</button>
+        </form>
+
+        <form id="step2Form" class="form-container" style="display: none;">
+            <label for="dobInput">Enter your date of birth:</label>
+            <input type="date" id="dobInput" required>
+            <button type="submit">Next</button>
+        </form>
+
+        <form id="step3Form" class="form-container" style="display: none;">
+            <label for="crushNameInput">Can I know your crush's name?</label>
+            <input type="text" id="crushNameInput" required>
+            <label for="crushDobInput">Enter their date of birth:</label>
+            <input type="date" id="crushDobInput" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        
+        <div id="loadingSpinner" style="display: none; text-align: center;">
+            <p>Loading...</p>
+            <div class="spinner"></div>
+        </div>
+
+        <p id="finalMessage" style="display: none;"></p>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
